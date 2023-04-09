@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Envoie la requête POST
-        String url = "http://10.0.2.2/API_Equides/connectUser.php";
+        String url = "https://www.equides.eu/API_Equides/connectUser.php";
 
         Map<String, String> params = new HashMap<>();
         params.put("mail", mail);
