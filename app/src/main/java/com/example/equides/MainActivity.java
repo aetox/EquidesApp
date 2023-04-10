@@ -64,14 +64,19 @@ public class MainActivity extends AppCompatActivity {
     public void onApiResponse(JSONObject response){
         Boolean success = null;
         String error ="";
+        String idLogin = "";
 
         try {
             success = response.getBoolean("success");
 
             if (success == true){
 
+                idLogin = response.getString("id_login"); // Recupere l'id_login de la personne connectée
+
                 Intent interfaceActivity = new Intent(getApplicationContext(), com.example.equides.InterfaceActivity.class);
                 interfaceActivity.putExtra("mail",mail);
+                interfaceActivity.putExtra("idLogin",idLogin);
+
                 startActivity(interfaceActivity);
                 finish();
 
@@ -100,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Envoie la requête POST
-        String url = "https://www.equides.eu/API_Equides/connectUser.php";
+        String url = "http://10.0.2.2/API_Equides/connectUser.php";
 
         Map<String, String> params = new HashMap<>();
         params.put("mail", mail);

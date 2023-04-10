@@ -29,6 +29,16 @@
             android:gravity="center">
         </TextView>
 
+        <TextView
+            android:id="@+id/idLoginTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID_Login = : 0"
+            android:textSize="25dp"
+            android:gravity="center">
+        </TextView>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
