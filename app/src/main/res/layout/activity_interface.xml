@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".InterfaceActivity">
 
+    <include
+        android:id="@+id/custom_toolbar"
+        layout="@layout/custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/welcomeTextView"
@@ -21,23 +31,72 @@
         </TextView>
 
         <TextView
+            android:id="@+id/InfoMailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Connecté(e) en tant que :"
+            android:textSize="25dp"
+            android:gravity="center">
+        </TextView>
+
+        <TextView
             android:id="@+id/welcomeMailTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"
             android:text="Mail"
             android:textSize="25dp"
             android:gravity="center">
         </TextView>
 
         <TextView
-            android:id="@+id/idLoginTextview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID_Login = : 0"
-            android:textSize="25dp"
-            android:gravity="center">
+            android:id="@+id/barree"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/black">
         </TextView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleButtonTextView"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Cliquez sur le bouton pour télécharger le carnet de transport de votre écurie"
+                android:textSize="25dp"
+                android:gravity="center">
+            </TextView>
+
+            <TextView
+                android:id="@+id/barre2"
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:background="@color/black">
+            </TextView>
+
+
+            <Button
+                android:id="@+id/PDFBtn"
+                android:layout_width="180dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Télécharger le PDF du carnet de transport"
+                android:layout_marginTop="50dp">
+            </Button>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -12,5 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="toolbarStyle">@style/EquidesToolbar</item>
+
+    </style>
+    <style name="EquidesToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:gravity">center</item>
+        <item name="titleTextAppearance">@style/EquidesToolbarTitleTextAppearance</item>
+    </style>
+
+    <style name="EquidesToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textAllCaps">true</item>
     </style>
 </resources>

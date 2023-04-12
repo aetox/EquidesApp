@@ -1,9 +1,11 @@
 package com.example.equides;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -35,12 +37,20 @@ public class MainActivity extends AppCompatActivity {
     private String password;
     private DatabaseManager databaseManager;
 
+    private Toolbar toolbar;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         errorConnectAccountTextView = findViewById(R.id.errorConnectAccountTextView);
         mailEditText = findViewById(R.id.mailEditText);
@@ -61,27 +71,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void onApiResponse(JSONObject response){
         Boolean success = null;
         String error ="";
-        String idLogin = "";
+        String idDetenteur = "";
 
         try {
             success = response.getBoolean("success");
 
             if (success == true){
-
-                idLogin = response.getString("id_login"); // Recupere l'id_login de la personne connectée
+                idDetenteur = response.getString("id_detenteur");
+                Log.d("DEBUG", "idDetenteur : " + idDetenteur);
 
                 Intent interfaceActivity = new Intent(getApplicationContext(), com.example.equides.InterfaceActivity.class);
                 interfaceActivity.putExtra("mail",mail);
-                interfaceActivity.putExtra("idLogin",idLogin);
+                interfaceActivity.putExtra("idDetenteur",idDetenteur);
 
                 startActivity(interfaceActivity);
                 finish();
 
             }else {
                 error = response.getString("error");
+                Log.d("DEBUG", "error : " + error);
                 errorConnectAccountTextView.setVisibility(View.VISIBLE);
                 errorConnectAccountTextView.setText(error);
             }
@@ -89,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
         }catch (JSONException e){
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-
         }
+
+
 
     }
 
@@ -105,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Envoie la requête POST
-        String url = "http://10.0.2.2/API_Equides/connectUser.php";
+        String url = "https://equides.eu/API_Equides/connectUser.php";
 
         Map<String, String> params = new HashMap<>();
         params.put("mail", mail);
