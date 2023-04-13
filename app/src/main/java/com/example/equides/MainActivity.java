@@ -1,14 +1,11 @@
 package com.example.equides;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,58 +27,41 @@ public class MainActivity extends AppCompatActivity {
     private TextView errorConnectAccountTextView;
     private EditText mailEditText;
     private EditText passwordEditText;
-
     private Button connectBtn;
-
     private String mail;
     private String password;
     private DatabaseManager databaseManager;
 
-    private Toolbar toolbar;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
 
         errorConnectAccountTextView = findViewById(R.id.errorConnectAccountTextView);
         mailEditText = findViewById(R.id.mailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-
         connectBtn = findViewById(R.id.connectBtn);
-
         databaseManager = new DatabaseManager(getApplicationContext());
 
         connectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mail = mailEditText.getText().toString(); // Recupere la valeur du input mail.
+                mail = mailEditText.getText().toString();
                 password = passwordEditText.getText().toString();
-
                 connectUser();
             }
         });
     }
 
-
-
     public void onApiResponse(JSONObject response){
-        Boolean success = null;
+        Boolean success;
         String error ="";
         String idDetenteur = "";
 
         try {
             success = response.getBoolean("success");
 
-            if (success == true){
+            if (success){
                 idDetenteur = response.getString("id_detenteur");
                 Log.d("DEBUG", "idDetenteur : " + idDetenteur);
 
@@ -91,21 +71,16 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(interfaceActivity);
                 finish();
-
-            }else {
+            } else {
                 error = response.getString("error");
                 Log.d("DEBUG", "error : " + error);
                 errorConnectAccountTextView.setVisibility(View.VISIBLE);
                 errorConnectAccountTextView.setText(error);
             }
-
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
-
-
-
     }
 
     public void connectUser() {
@@ -113,12 +88,10 @@ public class MainActivity extends AppCompatActivity {
         password = passwordEditText.getText().toString();
 
         if (mail.isEmpty() || password.isEmpty()) {
-            // Affiche un message d'erreur si les champs sont vides
             Toast.makeText(getApplicationContext(), "Veuillez remplir tous les champs", Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Envoie la requête POST
         String url = "https://equides.eu/API_Equides/connectUser.php";
 
         Map<String, String> params = new HashMap<>();
@@ -129,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 onApiResponse(response);
             }
         }, new Response.ErrorListener() {
