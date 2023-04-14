@@ -2,8 +2,8 @@
 <!-- Base application theme. -->
     <style name="Theme.Equides" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#CF7103</item>
-        <item name="colorPrimaryVariant">#CF7103</item>
+        <item name="colorPrimary">#A85C02</item>
+        <item name="colorPrimaryVariant">#A85C02</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,17 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="toolbarStyle">@style/EquidesToolbar</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
 
-    </style>
-    <style name="EquidesToolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:gravity">center</item>
-        <item name="titleTextAppearance">@style/EquidesToolbarTitleTextAppearance</item>
-    </style>
-
-    <style name="EquidesToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textAllCaps">true</item>
     </style>
 </resources>
